@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <!-- <link rel="stylesheet" href="styles.css">   -->
+
+    <title>Database Application</title>
+</head>
+<body>
+    <!-- ===================================================================================== -->
+    <!-- Display the current status of the database connection. 
+         !!HERE TO HELP U DEBUGGING, NOT REQUIRED IN YOUR OWN PROJECT!!
+         -->
+    <h1>Database Connection Status: 
+        <!-- An in-line placeholder to display connection status. -->
+        <span id="dbStatus"> </span>
+        <!-- A loading GIF, will be hided once get the status. -->
+        <img id="loadingGif" class="loading-gif" src="loading_100px.gif" alt="Loading...">
+    </h1>
+
+    <!-- shows investor table-->
+    <br><hr><br> <!-- ========================================================================= -->
+    <h2>Show all investors</h2>
+    <!-- A placeholder to display messages related to the stock buyer operation. -->
+    <div id="showAllInvestorResultMsg"></div>
+    <div id="investorList"></div>
+    <form id="showAllInvestorForm">
+        <button type="submit"> Show </button> <br>
+    </form>
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Section for User Registration -->
+    <h2>Register a New User</h2>
+    <form id="registerUserForm">
+        <label for="registerUserID">User ID:</label>
+        <input type="text" id="registerUserID" placeholder="Enter User ID" required><br><br>
+    
+        <label for="registerName">Name:</label>
+        <input type="text" id="registerName" placeholder="Enter Name" maxlength="50" required><br><br>
+    
+
+        <label for="registerPostalCode">Postal Code:</label> <!-- Investor1 Details -->
+        <input type="text" id="registerPostalCode" placeholder="Enter Postal Code" required><br><br>
+    
+        <label for="registerAddress">Address:</label>
+        <input type="text" id="registerAddress" placeholder="Enter Address" maxlength="100" required><br><br>
+    
+        <label for="registerCountry">Country:</label>
+        <input type="text" id="registerCountry" placeholder="Enter Country" required><br><br>
+    
+
+        <label for="registerProvince">Province:</label> <!-- Investor2 Details -->
+        <input type="text" id="registerProvince" placeholder="Enter Province" required><br><br>
+    
+        <label for="registerCity">City:</label>
+        <input type="text" id="registerCity" placeholder="Enter City" required><br><br>
+    
+        <button type="submit">Register</button>
+    </form>
+    
+    <p id="registerResultMsg"></p>
+
+
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!-- Investor Table -->
+    <h2>Investor Table</h2>
+    <table id="investorTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Postal Code</th>
+                <th>Address</th>
+                <th>Country</th>
+                <th>Province</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+    <hr>
+
+
+    <form id="updateInvestorForm" style="font-weight: bold;">
+        <label for="updateInvestorID" style="font-weight: bold; color: rgb(25, 13, 157);">
+            ID of Existing Investor:
+        </label>
+        <input 
+            type="text" id="updateInvestorID" placeholder="Enter Investor ID" required 
+            style="margin-left: 20px;" 
+        >
+        <br><br>
+
+        <label for="updateName">New Name:</label> 
+        <input type="text" id="updateName" placeholder="Enter new name">
+        <br><br>
+
+        <label for="updatePostalCode">New Postal Code:</label>
+        <input type="text" id="updatePostalCode" placeholder="Enter new postal code">
+        <br><br>
+
+        <label for="updateCountry">New Country:</label>
+        <input type="text" id="updateCountry" placeholder="Enter new country">
+        <br><br>
+
+        <label for="updateAddress">New Address:</label>
+        <input type="text" id="updateAddress" placeholder="Enter new address">
+        <br><br>
+
+        <label for="updateProvince">New Province:</label>
+        <input type="text" id="updateProvince" placeholder="Enter new province">
+        <br><br>
+
+        <label for="updateCity">New City:</label>
+        <input type="text" id="updateCity" placeholder="Enter new city">
+        <br><br>
+
+        <button type="submit">Update Investor</button>
+        <p id="updateInvestorResultMsg"></p>
+    </form>
+
+    <!-- Placeholder to display messages related to the registration -->
+    <div id="registerResultMsg"></div>
+    
+    <br><hr><br> <!-- ========================================================================= -->
+
+    <!--  -->
+    <h2>Selection</h2>
+    <form id="stockSearchForm">
+        <p>Click "Add conditions" to add filters to stocks.</p>
+        <div id="conditionContainer">
+            <!-- Conditions will be dynamically added here -->
+        </div>
+        <button type="button" class="add-condition-btn" id="addConditionBtn">Add Condition</button>
+        <br><br>
+        <p>Clicking "Search Stock" will display the rows that match the conditions above or all rows if no conditions are specified.</p>
+        <button type="submit">Search Stocks</button>
+    </form>
+    <br>
+    <div id="displayStockSelectionResults"></div>
+
+
+    <!-- Projection on Financial report -->
+    <h2>Projection</h2>
+    <form id="getColNamesform">
+        <button id="finReportBtn" type="submit">Refresh Column names</button>
+        <br>
+        <div class="form-group">
+            <div class="form-title">Select columns to fetch:</div>
+            <fieldset id="col-names-field"></fieldset> <!-- Will be dynamically populated -->
+        </div>
+
+    </form>
+
+    <button id="financialReportBtn">Refresh table:</button>
+    <div id="financialReportTableContainer"></div>
+
+    <!-- <br><br><br><br><br><br> -->
+
+
+        <!-- 2.1.3 DELETE-->
+        <br><hr><br> <!-- ========================================================================= -->
+        <h2>Delete Investor</h2>
+        <p>Enter the ID of an existed investor</p>
+        <form id="deleteInvestorForm">
+            ID: <input type="text" id="deleteInvestor" placeholder="Enter Investor ID" required> <br><br>
+    
+            <button type="submit"> Delete </button> <br>
+        </form>
+        <!-- A placeholder to display messages related to the delete operation. -->
+        <div id="deleteInvestorResultMsg"></div>
+    
+
+
+        <!-- 2.1.6 Join-->
+        <br><hr><br> <!-- ========================================================================= -->
+        <h2> Find Company's Stock buyer</h2>
+        <p>Enter the name of company</p>
+        <div id="findStockBuyersResultMsg"></div>
+        <div id="findStockBuyersList"></div>
+        <form id="findStockBuyersForm">
+            Company Name: <input type="text" id="findStockBuyers" placeholder="Enter Company Name" required> <br><br>
+            <button type="submit"> Find </button> <br>
+        </form>
+
+        <!-- 2.1.7 Aggregation with GROUP BY -->
+        <br><hr><br> <!-- ========================================================================= -->
+        <h2> List All Shares of A Investor Hold</h2>
+        <p>Enter the ID of the investor</p>
+        <div id="sharesOfInvestorResultMsg"></div>
+        <div id="sharesOfInvestorList"></div>
+        <form id="sharesOfInvestorForm">
+            ID: <input type="text" id="sharesOfInvestor" placeholder="Enter Investor ID" required> <br><br>
+            <button type="submit"> List </button> <br>
+        </form>
+
+        <!-- 2.1.8 Aggregation with HAVING  -->
+        <br><hr><br> <!-- ========================================================================= -->
+        <h2> List All Investors Holding Shares in More Than X Companies </h2>
+        <p>Specify the minimum number of companies an investor must hold shares in to be included in the list  </p>
+        <div id="moreThanResultMsg"></div>
+        <div id="moreThanList"></div>
+        <form id="moreThanForm">
+            Number: <input type="text" id="moreThan" placeholder="Enter number" required> <br><br>
+            <button type="submit"> List </button> <br>
+        </form>
+        
+        
+        
+        <!-- 2.1.9 Nested aggregation with GROUP BY  -->
+        <br><hr><br> <!-- ========================================================================= -->
+        <h2> Show Data Insights (Nested Aggregation with GROUP BY)</h2>
+        <p> Please select one of the available insights: </p>
+        <div id="insightQuestion"></div>
+        <br>
+        <div id="insightMsg"></div>
+        <br>
+        <div id="insightList"></div>
+        <br>
+        <form id="insightForm">
+            <Select id="insight-select" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="company-net-worth">
+                    Average Net Worth by Industry and Companies Above Average
+                </option>
+                <option value="active-investors">
+                    Most Active Investors by Transaction Count
+                </option>
+                <option value="revenue">
+                    Financial Reports with Revenue Above Industry Average
+                </option>
+            </Select>
+            <br><br>
+            <button type="submit">Show Insights</button>
+        </form>
+        
+        <br><hr><br>
+        
+        <!-- 2.1.10 Division -->
+        <br><hr><br> <!-- ========================================================================= -->
+        <h2> List investors that hold shares of all the listed companies. </h2>
+        <div id="allStocksOwnerMsg"></div>
+        <div id="allStocksOwnerList"></div>
+        <form id="allStocksOwnerForm">
+            <button type="submit"> Show Owners of shares in all Companies </button> <br>
+        </form>
+        
+        <br><hr><br> <!-- ========================================================================= -->
+        
+        <!-- <br><br><br><br><br><br><br><br> -->
+        
+        <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
+    <!-- External JavaScript file -->
+    <script defer src="helpers.js"></script>
+    <script defer src="scripts.js"></script>
+</body>
+</html>
+
