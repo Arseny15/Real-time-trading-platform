@@ -13,7 +13,7 @@ The scope of this project is in the Fintech industry, focusing on developing a r
   - Routes were thoroughly tested using Postman to ensure proper insertion, retrieval, updating, and deletion of data.
 
 - **Frontend Integration:**
-  - We used HTML and Vanilla JavaScript for our front-end implementation.
+  - Used HTML and Vanilla JavaScript for our front-end implementation.
   - HTTP requests were made to our backend using JavaScript’s built-in fetch API to perform CRUD operations on our Oracle database.
 
 - Successfully implemented an Oracle database connection pool.
